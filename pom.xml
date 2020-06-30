@@ -24,6 +24,16 @@
 		</dependency>
 	</dependencies>
 
+	<build>
+		<extensions>
+			<extension>
+				<groupId>io.packagecloud.maven.wagon</groupId>
+				<artifactId>maven-packagecloud-wagon</artifactId>
+				<version>0.0.6</version>
+			</extension>
+		</extensions>
+	</build>
+
 	<profiles>
 		<profile>
 			<id>packagecloud</id>
@@ -37,10 +47,25 @@
 					<url>packagecloud+https://packagecloud.io/NagarajaJB/snapshot</url>
 				</snapshotRepository>
 			</distributionManagement>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
+			<!-- <activation> <activeByDefault>true</activeByDefault> </activation> -->
 		</profile>
+
+		<!-- configure repositories if needed, in settings.xml its configured to 
+			mirror for central repo, so not adding repositories here, check README.md -->
+		<profile>
+			<id>nexus_distro</id>
+			<distributionManagement>
+				<snapshotRepository>
+					<id>njb-nexus-snapshot</id>
+					<url>http://localhost:9091/repository/njb-nexus-snapshot/</url>
+				</snapshotRepository>
+				<repository>
+					<id>njb-nexus-release</id>
+					<url>http://localhost:9091/repository/njb-nexus-release/</url>
+				</repository>
+			</distributionManagement>
+		</profile>
+
 	</profiles>
 
 </project>
